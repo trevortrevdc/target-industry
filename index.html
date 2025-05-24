@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prince William County - Targeted Industry/Expedited Permitting Application</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: #f5f5f7;
+            color: #1d1d1f;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: white;
+            border-radius: 0;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(45deg, #1b2f52, #ff0088);
+        }
+
+        .logo {
+            margin-bottom: 20px;
+        }
+
+        .logo img {
+            max-width: 300px;
+            height: auto;
+            width: 100%;
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #1b2f52, #ff0088);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            color: #6e6e73;
+            font-size: 18px;
+        }
+
+        .progress-bar {
+            background: white;
+            border-radius: 0;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .progress-step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .progress-step::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            right: -50%;
+            height: 2px;
+            background: #e0e0e0;
+            z-index: -1;
+        }
+
+        .progress-step:last-child::before {
+            display: none;
+        }
+
+        .progress-step.active::before {
+            background: #ff0088;
+        }
+
+        .step-circle {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #e0e0e0;
+            margin: 0 auto 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .progress-step.active .step-circle,
+        .progress-step.completed .step-circle {
+            background: #ff0088;
+        }
+
+        .step-label {
+            font-size: 12px;
+            color: #6e6e73;
+        }
+
+        .form-section {
+            background: white;
+            border-radius: 0;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            display: none;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        .form-section.active {
+            display: block;
+        }
+
+        .form-section.active {
+            display: block;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            color: #1d1d1f;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: #1d1d1f;
+            font-size: 14px;
+        }
+
+        .helper-text {
+            font-size: 12px;
+            color: #6e6e73;
+            margin-top: 4px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="number"],
+        input[type="date"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 0;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #fafafa;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #ff0088;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(255, 0, 136, 0.1);
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        .year-inputs {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 0;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #1d1d1f;
+        }
+
+        .btn-secondary:hover {
+            background: #e0e0e0;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #1b2f52, #ff0088);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 0, 136, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 0, 136, 0.4);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .summary-section {
+            background: #f8f9fa;
+            border-radius: 0;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .summary-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #1d1d1f;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .summary-item:last-child {
+            border-bottom: none;
+        }
+
+        .summary-label {
+            font-weight: 500;
+            color: #6e6e73;
+        }
+
+        .summary-value {
+            font-weight: 600;
+            color: #1d1d1f;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #6e6e73;
+            font-size: 14px;
+        }
+
+        .footer a {
+            color: #ff0088;
+            text-decoration: none;
+        }
+
+        .required {
+            color: #e91e63;
+        }
+
+        .info-box {
+            background: #fff0f5;
+            border-left: 4px solid #ff0088;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 0;
+        }
+
+        .info-box p {
+            margin: 0;
+            color: #d4005f;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .form-section {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .section-title {
+                font-size: 20px;
+            }
+
+            .progress-steps {
+                flex-wrap: wrap;
+            }
+
+            .navigation-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <img src="logo.svg" alt="Prince William County Department of Economic Development">
+            </div>
+            <p class="subtitle">Targeted Industry/Expedited Permitting Application</p>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-steps">
+                <div class="progress-step active" data-step="1">
+                    <div class="step-circle">1</div>
+                    <div class="step-label">Company Info</div>
+                </div>
+                <div class="progress-step" data-step="2">
+                    <div class="step-circle">2</div>
+                    <div class="step-label">Project Details</div>
+                </div>
+                <div class="progress-step" data-step="3">
+                    <div class="step-circle">3</div>
+                    <div class="step-label">Employment</div>
+                </div>
+                <div class="progress-step" data-step="4">
+                    <div class="step-circle">4</div>
+                    <div class="step-label">Investment</div>
+                </div>
+                <div class="progress-step" data-step="5">
+                    <div class="step-circle">5</div>
+                    <div class="step-label">Timeline</div>
+                </div>
+                <div class="progress-step" data-step="6">
+                    <div class="step-circle">6</div>
+                    <div class="step-label">Review</div>
+                </div>
+            </div>
+        </div>
+
+        <form id="permitForm">
+            <!-- Step 1: Company Information -->
+            <div class="form-section active" data-step="1">
+                <h2 class="section-title">Company Information</h2>
+                
+                <div class="form-group">
+                    <label for="companyName">Company Name <span class="required">*</span></label>
+                    <input type="text" id="companyName" name="companyName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="hqAddress">Company Headquarters Address</label>
+                    <input type="text" id="hqAddress" name="hqAddress" placeholder="123 Main Street, City, State ZIP">
+                </div>
+
+                <h3 style="margin-top: 30px; margin-bottom: 20px; font-size: 18px;">Primary Contact Information</h3>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="contactName">Contact Name <span class="required">*</span></label>
+                        <input type="text" id="contactName" name="contactName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactTitle">Contact Title <span class="required">*</span></label>
+                        <input type="text" id="contactTitle" name="contactTitle" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="contactPhone">Phone Number <span class="required">*</span></label>
+                        <input type="tel" id="contactPhone" name="contactPhone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactEmail">Email Address <span class="required">*</span></label>
+                        <input type="email" id="contactEmail" name="contactEmail" required>
+                    </div>
+                </div>
+
+                <div class="navigation-buttons">
+                    <div></div>
+                    <button type="button" class="btn btn-primary" onclick="nextStep()">Next Step</button>
+                </div>
+            </div>
+
+            <!-- Step 2: Project Details -->
+            <div class="form-section" data-step="2">
+                <h2 class="section-title">Project Details</h2>
+                
+                <div class="form-group">
+                    <label for="projectAddress">Project Location in Prince William County <span class="required">*</span></label>
+                    <input type="text" id="projectAddress" name="projectAddress" placeholder="Project site or building address" required>
+                    <p class="helper-text">Enter the address of the site or building for this project</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="activities">Description of Business Activities <span class="required">*</span></label>
+                    <textarea id="activities" name="activities" required placeholder="Describe the operations and activities that will take place at this location..."></textarea>
+                    <p class="helper-text">Please provide details about your business operations, manufacturing processes, services provided, etc.</p>
+                </div>
+
+                <h3 style="margin-top: 30px; margin-bottom: 20px; font-size: 18px;">Project Type</h3>
+
+                <div class="form-group">
+                    <label>What type of project is this? <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="newConstruction" name="projectType" value="new" required>
+                            <label for="newConstruction">New Construction</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="upfit" name="projectType" value="upfit" required>
+                            <label for="upfit">Upfit/Renovation</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="both" name="projectType" value="both" required>
+                            <label for="both">Both</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="constructionDetails" style="display: none;">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="siteSize">Site Size (acres)</label>
+                            <input type="number" id="siteSize" name="siteSize" step="0.01">
+                        </div>
+                        <div class="form-group">
+                            <label for="buildingSize">New Building Size (sq ft)</label>
+                            <input type="number" id="buildingSize" name="buildingSize">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="upfitDetails" style="display: none;">
+                    <div class="form-group">
+                        <label for="upfitSize">Upfit/Renovation Size (sq ft)</label>
+                        <input type="number" id="upfitSize" name="upfitSize">
+                    </div>
+                </div>
+
+                <div class="navigation-buttons">
+                    <button type="button" class="btn btn-secondary" onclick="prevStep()">Previous</button>
+                    <button type="button" class="btn btn-primary" onclick="nextStep()">Next Step</button>
+                </div>
+            </div>
+
+            <!-- Step 3: Employment Information -->
+            <div class="form-section" data-step="3">
+                <h2 class="section-title">Employment & Economic Impact</h2>
+                
+                <div class="info-box">
+                    <p><strong>Note:</strong> Employment numbers help us understand the economic impact of your project and determine eligibility for expedited permitting.</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="retainedJobs">Current Jobs to be Retained</label>
+                    <input type="number" id="retainedJobs" name="retainedJobs" min="0">
+                    <p class="helper-text">Number of existing employees that will continue working at this location</p>
+                </div>
+
+                <div class="form-group">
+                    <label>New Jobs to be Created (by year)</label>
+                    <div class="year-inputs">
+                        <div>
+                            <label for="newJobsYear1">Year 1</label>
+                            <input type="number" id="newJobsYear1" name="newJobsYear1" min="0">
+                        </div>
+                        <div>
+                            <label for="newJobsYear2">Year 2</label>
+                            <input type="number" id="newJobsYear2" name="newJobsYear2" min="0">
+                        </div>
+                        <div>
+                            <label for="newJobsYear3">Year 3</label>
+                            <input type="number" id="newJobsYear3" name="newJobsYear3" min="0">
+                        </div>
+                    </div>
+                    <p class="helper-text">Count jobs only in the year they will be created</p>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="averageWage">Average Annual Wage <span class="required">*</span></label>
+                        <input type="number" id="averageWage" name="averageWage" required>
+                        <p class="helper-text">Average salary for positions at this location</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="peopleMoving">Expected New Residents</label>
+                        <input type="number" id="peopleMoving" name="peopleMoving" min="0">
+                        <p class="helper-text">People expected to relocate to Prince William County</p>
+                    </div>
+                </div>
+
+                <div class="navigation-buttons">
+                    <button type="button" class="btn btn-secondary" onclick="prevStep()">Previous</button>
+                    <button type="button" class="btn btn-primary" onclick="nextStep()">Next Step</button>
+                </div>
+            </div>
+
+            <!-- Step 4: Investment Information -->
+            <div class="form-section" data-step="4">
+                <h2 class="section-title">Capital Investment & Financial Details</h2>
+                
+                <div class="form-group">
+                    <label>Will you be purchasing or leasing the property? <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="purchase" name="ownershipType" value="purchase" required>
+                            <label for="purchase">Purchase</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="lease" name="ownershipType" value="lease" required>
+                            <label for="lease">Lease</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="leaseTerms" style="display: none;">
+                    <h3 style="margin-top: 25px; margin-bottom: 15px; font-size: 18px;">Lease Terms</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="leaseTerm">Lease Term (years)</label>
+                            <input type="number" id="leaseTerm" name="leaseTerm" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="leasePayments">Annual Lease Payment</label>
+                            <input type="number" id="leasePayments" name="leasePayments">
+                        </div>
+                        <div class="form-group">
+                            <label for="leaseRate">Lease Rate ($/sq ft)</label>
+                            <input type="text" id="leaseRate" name="leaseRate">
+                        </div>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 30px; margin-bottom: 20px; font-size: 18px;">Capital Investment Breakdown</h3>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="landPurchase">Land/Building Purchase</label>
+                        <input type="number" id="landPurchase" name="landPurchase" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="construction">Construction/Upfit</label>
+                        <input type="number" id="construction" name="construction" min="0">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="furniture">Furniture, Fixtures & Equipment</label>
+                        <input type="number" id="furniture" name="furniture" min="0">
+                        <p class="helper-text">Excludes computers and peripherals</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="computers">Computer & Peripheral Equipment</label>
+                        <input type="number" id="computers" name="computers" min="0">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label><strong>Total Investment: $<span id="totalInvestment">0</span></strong></label>
+                </div>
+
+                <div class="navigation-buttons">
+                    <button type="button" class="btn btn-secondary" onclick="prevStep()">Previous</button>
+                    <button type="button" class="btn btn-primary" onclick="nextStep()">Next Step</button>
+                </div>
+            </div>
+
+            <!-- Step 5: Project Timeline -->
+            <div class="form-section" data-step="5">
+                <h2 class="section-title">Project Timeline & Commitments</h2>
+                
+                <div class="info-box">
+                    <p><strong>Expedited Permitting:</strong> Targeted Industry status can significantly reduce permit processing times.</p>
+                </div>
+
+                <h3 style="margin-bottom: 20px; font-size: 18px;">Anticipated Schedule</h3>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="sitePlanDate">Site Plan Submittal Date</label>
+                        <input type="date" id="sitePlanDate" name="sitePlanDate">
+                    </div>
+                    <div class="form-group">
+                        <label for="buildingPlanDate">Building Plan Submittal Date</label>
+                        <input type="date" id="buildingPlanDate" name="buildingPlanDate">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="upfitPlanDate">Upfit Plan Submittal Date</label>
+                        <input type="date" id="upfitPlanDate" name="upfitPlanDate">
+                    </div>
+                    <div class="form-group">
+                        <label for="occupancyDate">Desired Occupancy Date <span class="required">*</span></label>
+                        <input type="date" id="occupancyDate" name="occupancyDate" required>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 30px; margin-bottom: 20px; font-size: 18px;">Reporting Commitments</h3>
+
+                <div class="form-group">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="annualReports" name="annualReports" required>
+                        <label for="annualReports">I agree to provide annual employment reports to the Department of Economic Development for three years <span class="required">*</span></label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="publicAnnouncement" name="publicAnnouncement" required>
+                        <label for="publicAnnouncement">I agree to participate in a public announcement if Targeted Industry status is granted <span class="required">*</span></label>
+                    </div>
+                </div>
+
+                <div class="navigation-buttons">
+                    <button type="button" class="btn btn-secondary" onclick="prevStep()">Previous</button>
+                    <button type="button" class="btn btn-primary" onclick="nextStep()">Review Application</button>
+                </div>
+            </div>
+
+            <!-- Step 6: Review and Submit -->
+            <div class="form-section" data-step="6">
+                <h2 class="section-title">Review Your Application</h2>
+                
+                <div class="info-box">
+                    <p>Please review all information below before submitting your application.</p>
+                </div>
+
+                <div id="summaryContent">
+                    <!-- Summary will be populated by JavaScript -->
+                </div>
+
+                <div style="margin-top: 30px; padding: 20px; background: #f8f9fa; border-radius: 0;">
+                    <p style="margin-bottom: 20px; font-weight: 500;">By signing below, I certify that all information in this application is accurate and complete to the best of my knowledge.</p>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="signature">Electronic Signature <span class="required">*</span></label>
+                            <input type="text" id="signature" name="signature" placeholder="Type your full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="dateSign">Date <span class="required">*</span></label>
+                            <input type="date" id="dateSign" name="dateSign" required readonly>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="navigation-buttons">
+                    <button type="button" class="btn btn-secondary" onclick="prevStep()">Previous</button>
+                    <button type="submit" class="btn btn-primary">Submit Application</button>
+                </div>
+            </div>
+        </form>
+
+        <div class="footer">
+            <p>Prince William County Department of Economic Development and Tourism</p>
+            <p>13575 Heathcote Boulevard, Suite 240, Gainesville, VA 20155 | 703-792-5500</p>
+            <p><a href="https://www.pwcded.org" target="_blank">www.pwcded.org</a></p>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 6;
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set today's date
+            document.getElementById('dateSign').valueAsDate = new Date();
+            
+            // Add event listeners
+            setupEventListeners();
+            
+            // Initialize first step
+            updateProgressBar();
+        });
+
+        function setupEventListeners() {
+            // Project type radio buttons
+            document.querySelectorAll('input[name="projectType"]').forEach(radio => {
+                radio.addEventListener('change', function() {
+                    const constructionDetails = document.getElementById('constructionDetails');
+                    const upfitDetails = document.getElementById('upfitDetails');
+                    
+                    if (this.value === 'new') {
+                        constructionDetails.style.display = 'block';
+                        upfitDetails.style.display = 'none';
+                    } else if (this.value === 'upfit') {
+                        constructionDetails.style.display = 'none';
+                        upfitDetails.style.display = 'block';
+                    } else if (this.value === 'both') {
+                        constructionDetails.style.display = 'block';
+                        upfitDetails.style.display = 'block';
+                    }
+                });
+            });
+
+            // Ownership type radio buttons
+            document.querySelectorAll('input[name="ownershipType"]').forEach(radio => {
+                radio.addEventListener('change', function() {
+                    const leaseTerms = document.getElementById('leaseTerms');
+                    leaseTerms.style.display = this.value === 'lease' ? 'block' : 'none';
+                });
+            });
+
+            // Phone number formatting
+            document.getElementById('contactPhone').addEventListener('input', formatPhoneNumber);
+
+            // Calculate total investment
+            const investmentFields = ['landPurchase', 'construction', 'furniture', 'computers'];
+            investmentFields.forEach(field => {
+                document.getElementById(field).addEventListener('input', calculateTotalInvestment);
+            });
+
+            // Form submission
+            document.getElementById('permitForm').addEventListener('submit', handleSubmit);
+        }
+
+        function nextStep() {
+            if (currentStep < totalSteps) {
+                if (validateStep(currentStep)) {
+                    // Hide current step
+                    const currentSection = document.querySelector(`.form-section[data-step="${currentStep}"]`);
+                    if (currentSection) {
+                        currentSection.classList.remove('active');
+                    }
+                    
+                    // Move to next step
+                    currentStep++;
+                    
+                    // Show next step
+                    const nextSection = document.querySelector(`.form-section[data-step="${currentStep}"]`);
+                    if (nextSection) {
+                        nextSection.classList.add('active');
+                    }
+                    
+                    updateProgressBar();
+                    
+                    if (currentStep === totalSteps) {
+                        generateSummary();
+                    }
+                    
+                    window.scrollTo(0, 0);
+                }
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 1) {
+                // Hide current step
+                const currentSection = document.querySelector(`.form-section[data-step="${currentStep}"]`);
+                if (currentSection) {
+                    currentSection.classList.remove('active');
+                }
+                
+                // Move to previous step
+                currentStep--;
+                
+                // Show previous step
+                const prevSection = document.querySelector(`.form-section[data-step="${currentStep}"]`);
+                if (prevSection) {
+                    prevSection.classList.add('active');
+                }
+                
+                updateProgressBar();
+                window.scrollTo(0, 0);
+            }
+        }
+
+        function updateProgressBar() {
+            document.querySelectorAll('.progress-step').forEach((step, index) => {
+                if (index < currentStep - 1) {
+                    step.classList.add('completed');
+                    step.classList.remove('active');
+                } else if (index === currentStep - 1) {
+                    step.classList.add('active');
+                    step.classList.remove('completed');
+                } else {
+                    step.classList.remove('active', 'completed');
+                }
+            });
+        }
+
+        function validateStep(step) {
+            const section = document.querySelector(`.form-section[data-step="${step}"]`);
+            const requiredFields = section.querySelectorAll('[required]');
+            let isValid = true;
+
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    field.style.borderColor = '#e91e63';
+                    isValid = false;
+                } else {
+                    field.style.borderColor = '#e0e0e0';
+                }
+            });
+
+            if (!isValid) {
+                alert('Please fill in all required fields before proceeding.');
+            }
+
+            return isValid;
+        }
+
+        function formatPhoneNumber(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 0) {
+                if (value.length <= 3) {
+                    value = value;
+                } else if (value.length <= 6) {
+                    value = value.slice(0, 3) + '-' + value.slice(3);
+                } else {
+                    value = value.slice(0, 3) + '-' + value.slice(3, 6) + '-' + value.slice(6, 10);
+                }
+            }
+            e.target.value = value;
+        }
+
+        function calculateTotalInvestment() {
+            const fields = ['landPurchase', 'construction', 'furniture', 'computers'];
+            let total = 0;
+            
+            fields.forEach(field => {
+                const value = parseFloat(document.getElementById(field).value) || 0;
+                total += value;
+            });
+            
+            document.getElementById('totalInvestment').textContent = total.toLocaleString();
+        }
+
+        function generateSummary() {
+            const summaryContent = document.getElementById('summaryContent');
+            const formData = new FormData(document.getElementById('permitForm'));
+            
+            let summaryHTML = '';
+            
+            // Company Information
+            summaryHTML += `
+                <div class="summary-section">
+                    <h3 class="summary-title">Company Information</h3>
+                    <div class="summary-item">
+                        <span class="summary-label">Company Name:</span>
+                        <span class="summary-value">${formData.get('companyName') || 'N/A'}</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Contact:</span>
+                        <span class="summary-value">${formData.get('contactName') || 'N/A'} - ${formData.get('contactTitle') || 'N/A'}</span>
+                    </div>
+                </div>
+            `;
+            
+            // Project Details
+            summaryHTML += `
+                <div class="summary-section">
+                    <h3 class="summary-title">Project Details</h3>
+                    <div class="summary-item">
+                        <span class="summary-label">Location:</span>
+                        <span class="summary-value">${formData.get('projectAddress') || 'N/A'}</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Project Type:</span>
+                        <span class="summary-value">${formData.get('projectType') ? formData.get('projectType').charAt(0).toUpperCase() + formData.get('projectType').slice(1) : 'N/A'}</span>
+                    </div>
+                </div>
+            `;
+            
+            // Employment
+            const totalNewJobs = (parseInt(formData.get('newJobsYear1') || 0) + 
+                                parseInt(formData.get('newJobsYear2') || 0) + 
+                                parseInt(formData.get('newJobsYear3') || 0));
+            
+            summaryHTML += `
+                <div class="summary-section">
+                    <h3 class="summary-title">Employment Impact</h3>
+                    <div class="summary-item">
+                        <span class="summary-label">Jobs Retained:</span>
+                        <span class="summary-value">${formData.get('retainedJobs') || '0'}</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">New Jobs (3 years):</span>
+                        <span class="summary-value">${totalNewJobs}</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Average Wage:</span>
+                        <span class="summary-value">$${parseInt(formData.get('averageWage') || 0).toLocaleString()}</span>
+                    </div>
+                </div>
+            `;
+            
+            // Investment
+            const totalInvestment = (parseInt(formData.get('landPurchase') || 0) +
+                                   parseInt(formData.get('construction') || 0) +
+                                   parseInt(formData.get('furniture') || 0) +
+                                   parseInt(formData.get('computers') || 0));
+            
+            summaryHTML += `
+                <div class="summary-section">
+                    <h3 class="summary-title">Capital Investment</h3>
+                    <div class="summary-item">
+                        <span class="summary-label">Total Investment:</span>
+                        <span class="summary-value">$${totalInvestment.toLocaleString()}</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Ownership Type:</span>
+                        <span class="summary-value">${formData.get('ownershipType') ? formData.get('ownershipType').charAt(0).toUpperCase() + formData.get('ownershipType').slice(1) : 'N/A'}</span>
+                    </div>
+                </div>
+            `;
+            
+            summaryContent.innerHTML = summaryHTML;
+        }
+
+        function handleSubmit(e) {
+            e.preventDefault();
+            
+            if (!validateStep(currentStep)) {
+                return;
+            }
+            
+            // Show loading state
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Submitting...';
+            submitBtn.disabled = true;
+            
+            // Collect all form data
+            const formData = new FormData(e.target);
+            const data = {};
+            
+            for (let [key, value] of formData.entries()) {
+                data[key] = value;
+            }
+            
+            // Add checkbox values
+            data.annualReports = document.getElementById('annualReports').checked;
+            data.publicAnnouncement = document.getElementById('publicAnnouncement').checked;
+            
+            // Add calculated totals
+            const totalNewJobs = (parseInt(data.newJobsYear1 || 0) + 
+                                parseInt(data.newJobsYear2 || 0) + 
+                                parseInt(data.newJobsYear3 || 0));
+            
+            const totalInvestment = (parseInt(data.landPurchase || 0) +
+                                   parseInt(data.construction || 0) +
+                                   parseInt(data.furniture || 0) +
+                                   parseInt(data.computers || 0));
+            
+            data.totalNewJobs = totalNewJobs;
+            data.totalInvestment = totalInvestment;
+            data.submissionDate = new Date().toISOString();
+            
+            // Submit to Netlify Function
+            fetch('/.netlify/functions/submit-to-asana', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    // Also create local backup
+                    downloadBackup(data);
+                    
+                    // Show success message
+                    alert(`Application submitted successfully!\n\nAsana Task Created: ${result.taskUrl}\n\nA backup copy has been downloaded to your device.`);
+                    
+                    // Reset form
+                    if (confirm('Would you like to submit another application?')) {
+                        location.reload();
+                    }
+                } else {
+                    throw new Error(result.error || 'Submission failed');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                
+                // Fallback to download-only mode
+                downloadBackup(data);
+                
+                alert('There was an issue connecting to Asana, but your application has been saved locally. Please email the downloaded file to permits@pwcded.org');
+            })
+            .finally(() => {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            });
+        }
+        
+        function downloadBackup(data) {
+            const jsonData = JSON.stringify(data, null, 2);
+            const blob = new Blob([jsonData], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `PWC_Permit_Application_${data.companyName.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>
