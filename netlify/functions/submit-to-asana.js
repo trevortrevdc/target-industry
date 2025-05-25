@@ -202,11 +202,17 @@ function buildCustomFields(data) {
   if (data.newJobsYear3) fields[CUSTOM_FIELDS.newJobsYear3] = parseInt(data.newJobsYear3);
   if (data.averageWage) fields[CUSTOM_FIELDS.averageWage] = parseInt(data.averageWage);
   
-  // Date fields
-  fields[CUSTOM_FIELDS.applicationDate] = new Date().toISOString().split('T')[0];
-  if (data.occupancyDate) fields[CUSTOM_FIELDS.occupancyDate] = data.occupancyDate;
-  if (data.sitePlanDate) fields[CUSTOM_FIELDS.sitePlanDate] = data.sitePlanDate;
-  if (data.buildingPlanDate) fields[CUSTOM_FIELDS.buildingPlanDate] = data.buildingPlanDate;
+  // Date fields - Asana requires object format
+  fields[CUSTOM_FIELDS.applicationDate] = { date: new Date().toISOString().split('T')[0] };
+  if (data.occupancyDate) {
+    fields[CUSTOM_FIELDS.occupancyDate] = { date: data.occupancyDate };
+  }
+  if (data.sitePlanDate) {
+    fields[CUSTOM_FIELDS.sitePlanDate] = { date: data.sitePlanDate };
+  }
+  if (data.buildingPlanDate) {
+    fields[CUSTOM_FIELDS.buildingPlanDate] = { date: data.buildingPlanDate };
+  }
   
   // Enum fields with actual GIDs
   if (data.projectType && PROJECT_TYPE_OPTIONS[data.projectType]) {
