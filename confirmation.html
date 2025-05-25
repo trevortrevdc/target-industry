@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Submitted - Prince William County</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: #f5f5f7;
+            color: #1d1d1f;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            flex: 1;
+        }
+
+        .header {
+            background: white;
+            border-radius: 0;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(45deg, #1b2f52, #ff0088);
+        }
+
+        .logo {
+            margin-bottom: 20px;
+        }
+
+        .logo img {
+            max-width: 300px;
+            height: auto;
+            width: 100%;
+        }
+
+        .subtitle {
+            color: #6e6e73;
+            font-size: 18px;
+        }
+
+        .confirmation-section {
+            background: white;
+            border-radius: 0;
+            padding: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: #4CAF50;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 40px;
+        }
+
+        .error-icon {
+            background: #f44336;
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #1d1d1f;
+        }
+
+        .message {
+            font-size: 18px;
+            color: #6e6e73;
+            margin-bottom: 30px;
+        }
+
+        .details-box {
+            background: #f8f9fa;
+            padding: 30px;
+            margin: 30px 0;
+            border-left: 4px solid #ff0088;
+            text-align: left;
+        }
+
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .detail-item:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            font-weight: 500;
+            color: #6e6e73;
+        }
+
+        .detail-value {
+            font-weight: 600;
+            color: #1d1d1f;
+        }
+
+        .actions {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 16px 32px;
+            font-size: 16;
+            font-weight: 600;
+            border-radius: 0;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #1b2f52, #ff0088);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 0, 136, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 0, 136, 0.4);
+        }
+
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #1d1d1f;
+        }
+
+        .btn-secondary:hover {
+            background: #e0e0e0;
+        }
+
+        .next-steps {
+            background: #fff0f5;
+            padding: 30px;
+            margin-top: 30px;
+            border-radius: 0;
+        }
+
+        .next-steps h2 {
+            color: #1b2f52;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .next-steps ol {
+            text-align: left;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .next-steps li {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #6e6e73;
+            font-size: 14px;
+            background: white;
+            margin-top: 40px;
+        }
+
+        .footer a {
+            color: #ff0088;
+            text-decoration: none;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #ff0088;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .confirmation-section {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .actions {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <img src="logo.svg" alt="Prince William County Department of Economic Development">
+            </div>
+            <p class="subtitle">Targeted Industry Status Application</p>
+        </div>
+
+        <div class="confirmation-section" id="loadingSection">
+            <div class="loading">
+                <div class="spinner"></div>
+                <p>Processing your application...</p>
+            </div>
+        </div>
+
+        <div class="confirmation-section" id="successSection" style="display: none;">
+            <div class="success-icon">✓</div>
+            <h1>Application Submitted Successfully!</h1>
+            <p class="message">Your Targeted Industry Status application has been received and is being processed.</p>
+            
+            <div class="details-box">
+                <div class="detail-item">
+                    <span class="detail-label">Application Type:</span>
+                    <span class="detail-value">Targeted Industry Status (TIS)</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Company:</span>
+                    <span class="detail-value" id="companyName"></span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Submission Date:</span>
+                    <span class="detail-value" id="submissionDate"></span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Reference Number:</span>
+                    <span class="detail-value" id="referenceNumber"></span>
+                </div>
+            </div>
+
+            <div class="actions">
+                <button class="btn btn-primary" onclick="downloadPDF()">Download Application PDF</button>
+                <a href="/" class="btn btn-secondary">Submit Another Application</a>
+            </div>
+
+            <div class="next-steps">
+                <h2>What Happens Next?</h2>
+                <ol>
+                    <li>Your application has been automatically added to our project management system for review.</li>
+                    <li>A member of our Economic Development team will review your application within <strong>2 business days</strong>.</li>
+                    <li>If your application qualifies for Targeted Industry Status, you'll receive expedited permit processing.</li>
+                    <li>We'll contact you at the email address provided if we need any additional information.</li>
+                    <li>You can track your application status by referencing the number above.</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="confirmation-section" id="errorSection" style="display: none;">
+            <div class="success-icon error-icon">✕</div>
+            <h1>Submission Issue</h1>
+            <p class="message" id="errorMessage">There was an issue submitting your application, but we've saved your information.</p>
+            
+            <div class="actions">
+                <button class="btn btn-primary" onclick="downloadBackup()">Download Application Backup</button>
+                <a href="/" class="btn btn-secondary">Try Again</a>
+            </div>
+
+            <div class="next-steps">
+                <h2>Alternative Submission Methods</h2>
+                <ol>
+                    <li>Download your application backup using the button above.</li>
+                    <li>Email the file to: <a href="mailto:permits@pwcded.org">permits@pwcded.org</a></li>
+                    <li>Or call us at: <strong>703-792-5500</strong> for assistance.</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Prince William County Department of Economic Development and Tourism</p>
+        <p>13575 Heathcote Boulevard, Suite 240, Gainesville, VA 20155 | 703-792-5500</p>
+        <p><a href="https://www.pwcded.org" target="_blank">www.pwcded.org</a></p>
+    </div>
+
+    <script>
+        // Get data from sessionStorage
+        const applicationData = JSON.parse(sessionStorage.getItem('tisApplicationData') || '{}');
+        const submissionResult = JSON.parse(sessionStorage.getItem('tisSubmissionResult') || '{}');
+
+        // Show appropriate section
+        setTimeout(() => {
+            document.getElementById('loadingSection').style.display = 'none';
+            
+            if (submissionResult.success) {
+                document.getElementById('successSection').style.display = 'block';
+                
+                // Populate details
+                document.getElementById('companyName').textContent = applicationData.companyName || 'N/A';
+                document.getElementById('submissionDate').textContent = new Date().toLocaleDateString();
+                
+                // Generate reference number from task ID or timestamp
+                const refNum = submissionResult.taskId ? 
+                    `TIS-${submissionResult.taskId.slice(-6).toUpperCase()}` : 
+                    `TIS-${Date.now().toString().slice(-6)}`;
+                document.getElementById('referenceNumber').textContent = refNum;
+                
+            } else {
+                document.getElementById('errorSection').style.display = 'block';
+                if (submissionResult.error) {
+                    document.getElementById('errorMessage').textContent = 
+                        'There was an issue submitting your application to our system, but we\'ve saved your information.';
+                }
+            }
+        }, 1500); // Show loading for 1.5 seconds
+
+        function downloadPDF() {
+            // Generate PDF client-side using jsPDF
+            const script = document.createElement('script');
+            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+            script.onload = function() {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+                
+                // Add header
+                doc.setFontSize(20);
+                doc.setTextColor(27, 47, 82); // #1b2f52
+                doc.text('Prince William County', 105, 20, { align: 'center' });
+                doc.setFontSize(16);
+                doc.text('Department of Economic Development', 105, 30, { align: 'center' });
+                doc.setFontSize(14);
+                doc.text('Targeted Industry Status Application', 105, 40, { align: 'center' });
+                
+                // Add pink line
+                doc.setDrawColor(255, 0, 136);
+                doc.setLineWidth(2);
+                doc.line(20, 50, 190, 50);
+                
+                // Add content
+                doc.setFontSize(12);
+                doc.setTextColor(0, 0, 0);
+                let y = 65;
+                
+                doc.setFont(undefined, 'bold');
+                doc.text('Application Details', 20, y);
+                doc.setFont(undefined, 'normal');
+                y += 10;
+                
+                // Add company info
+                doc.setFontSize(11);
+                doc.text(`Company Name: ${applicationData.companyName || 'N/A'}`, 20, y);
+                y += 8;
+                doc.text(`Contact: ${applicationData.contactName || 'N/A'}, ${applicationData.contactTitle || 'N/A'}`, 20, y);
+                y += 8;
+                doc.text(`Email: ${applicationData.contactEmail || 'N/A'}`, 20, y);
+                y += 8;
+                doc.text(`Phone: ${applicationData.contactPhone || 'N/A'}`, 20, y);
+                y += 12;
+                
+                // Add project details
+                doc.setFont(undefined, 'bold');
+                doc.text('Project Information', 20, y);
+                doc.setFont(undefined, 'normal');
+                y += 8;
+                doc.text(`Location: ${applicationData.projectAddress || 'N/A'}`, 20, y);
+                y += 8;
+                doc.text(`Project Type: ${applicationData.projectType || 'N/A'}`, 20, y);
+                y += 8;
+                doc.text(`Total Investment: $${parseInt(applicationData.totalInvestment || 0).toLocaleString()}`, 20, y);
+                y += 8;
+                doc.text(`New Jobs (3 years): ${applicationData.totalNewJobs || 0}`, 20, y);
+                y += 8;
+                doc.text(`Average Wage: $${parseInt(applicationData.averageWage || 0).toLocaleString()}`, 20, y);
+                
+                // Add footer
+                doc.setFontSize(9);
+                doc.setTextColor(150, 150, 150);
+                doc.text('This is a summary. The full application has been submitted to the Department of Economic Development.', 105, 280, { align: 'center' });
+                
+                // Save the PDF
+                doc.save(`TIS_Application_${applicationData.companyName?.replace(/\s+/g, '_') || 'Company'}_Summary.pdf`);
+            };
+            document.head.appendChild(script);
+        }
+
+        function downloadBackup() {
+            // Download JSON backup
+            const dataStr = JSON.stringify(applicationData, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `TIS_Application_Backup_${applicationData.companyName?.replace(/\s+/g, '_') || 'Company'}_${Date.now()}.json`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+
+        // Clear session storage after displaying
+        setTimeout(() => {
+            sessionStorage.removeItem('tisApplicationData');
+            sessionStorage.removeItem('tisSubmissionResult');
+        }, 5000);
+    </script>
+</body>
+</html>
