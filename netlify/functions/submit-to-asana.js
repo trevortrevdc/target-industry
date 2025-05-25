@@ -76,7 +76,7 @@ exports.handler = async (event, context) => {
     // Create Asana task
     const taskData = {
       data: {
-        name: `Permit Application - ${data.companyName}`,
+        name: `TIS Application - ${data.companyName}`,
         notes: generateTaskDescription(data),
         projects: [ASANA_PROJECT_ID],
         custom_fields: customFields,
@@ -119,7 +119,7 @@ exports.handler = async (event, context) => {
     
     // Add file field
     formData.push(`------${boundary}`);
-    formData.push(`Content-Disposition: form-data; name="file"; filename="${data.companyName.replace(/\s+/g, '_')}_Application.pdf"`);
+    formData.push(`Content-Disposition: form-data; name="file"; filename="TIS_Application_${data.companyName.replace(/\s+/g, '_')}.pdf"`);
     formData.push('Content-Type: application/pdf');
     formData.push('');
     
