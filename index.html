@@ -1055,6 +1055,9 @@
             data.totalInvestment = totalInvestment;
             data.submissionDate = new Date().toISOString();
             
+            // Store data in sessionStorage for confirmation page
+            sessionStorage.setItem('tisApplicationData', JSON.stringify(data));
+            
             // Submit to Netlify Function
             fetch('/.netlify/functions/submit-to-asana', {
                 method: 'POST',
@@ -1066,16 +1069,15 @@
             .then(response => response.json())
             .then(result => {
                 if (result.success) {
-                    // Also create local backup
-                    downloadBackup(data);
+                    // Store success info
+                    sessionStorage.setItem('tisSubmissionResult', JSON.stringify({
+                        success: true,
+                        taskUrl: result.taskUrl,
+                        taskId: result.taskId
+                    }));
                     
-                    // Show success message
-                    alert(`Application submitted successfully!\n\nAsana Task Created: ${result.taskUrl}\n\nA backup copy has been downloaded to your device.`);
-                    
-                    // Reset form
-                    if (confirm('Would you like to submit another application?')) {
-                        location.reload();
-                    }
+                    // Redirect to confirmation page
+                    window.location.href = '/confirmation.html';
                 } else {
                     throw new Error(result.error || 'Submission failed');
                 }
@@ -1083,14 +1085,14 @@
             .catch(error => {
                 console.error('Error:', error);
                 
-                // Fallback to download-only mode
-                downloadBackup(data);
+                // Store error state
+                sessionStorage.setItem('tisSubmissionResult', JSON.stringify({
+                    success: false,
+                    error: error.message
+                }));
                 
-                alert('There was an issue connecting to Asana, but your application has been saved locally. Please email the downloaded file to permits@pwcded.org');
-            })
-            .finally(() => {
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
+                // Still redirect to confirmation page (will show error state)
+                window.location.href = '/confirmation.html';
             });
         }
         
